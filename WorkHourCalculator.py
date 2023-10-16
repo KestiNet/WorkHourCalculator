@@ -1,5 +1,15 @@
 import tkinter as tk
 
+
+#Convert decimar time to datetime function
+def decimal_to_datetime_converter():
+    time = 72.345
+
+hours = int(time)
+minutes = (time*60) % 60
+
+print("%d:%02d" % (hours, minutes))
+
 def workhour_calculator_total():
     try:
         monday = float(textbox1.get())
@@ -39,7 +49,6 @@ textbox5 = tk.Entry(root)
 #textbox7 = tk.Entry(root)
 
 calculate_button = tk.Button(root, text="Calculate Total", command=workhour_calculator_total)
-
 result = tk.Label(root, text= "Total: 0")
 # Use the grid method to position the Labels and Entry widgets
 label1.grid(row=0, column=0)
@@ -56,8 +65,8 @@ textbox3.grid(row=2, column=1)
 textbox4.grid(row=3, column=1)
 textbox5.grid(row=4, column=1)
 #textbox6.grid(row=5, column=1)
-calculate_button.grid(row=5, column=0, columnspan=2)
-result.grid(row=6, column=1)
+result.grid(row=5, column=0)
 
+calculate_button.grid(row=6, column=0, columnspan=2)
 # Start the tkinter main loop
 root.mainloop()
