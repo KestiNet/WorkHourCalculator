@@ -1,6 +1,35 @@
 import tkinter as tk
+from datetime import datetime, timedelta
 
+#convert time from decimal to datetime
+def decimal_to_datetime_converter(time):
+    hours = int(time)
+    minutes = (time*60) % 60
 
+    time_delta = timedelta(hours=hours, minutes = minutes) 
+
+    return time_delta
+
+#get the entered values and call for the converter
+def workhour_calculator_total():
+    try:
+        monday = float(textbox1.get())
+        tuesday = float(textbox2.get())
+        wednesday = float(textbox3.get())
+        thursday = float(textbox4.get())
+        friday = float(textbox5.get())
+
+        total = monday + tuesday + wednesday + thursday + friday
+
+        total_datetime = decimal_to_datetime_converter(total)
+
+        result.config(text=f"Total: {total_datetime}")
+        converted_result.delete(1.0, "end")  # Clear the previous content
+        converted_result.insert("insert", f"Total (in datetime): {total_datetime}")
+        
+        
+    except ValueError:
+        result.config(text= " Invalid Input")
 #
 # Create the main tkinter window
 root = tk.Tk()
@@ -33,8 +62,11 @@ textbox11 = tk.Entry(root)
 textbox12 = tk.Entry(root)
 
 
-#calculate_button = tk.Button(root, text="Calculate Total", command=workhour_calculator_total)
-result = tk.Label(root, text= "Total: 0")
+calculate_button = tk.Button(root, text="Calculate Total", command=workhour_calculator_total)
+
+result = tk.Label(root, text= "Total: ")
+
+
 # Use the grid method to position the Labels and Entry widgets
 label1.grid(row=0, column=0)
 label2.grid(row=1, column=0)
@@ -60,6 +92,10 @@ textbox12.grid(row=0, column=2)
 #textbox6.grid(row=5, column=1)
 result.grid(row=5, column=0)
 
-#calculate_button.grid(row=6, column=0, columnspan=2)
+calculate_button.grid(row=6, column=0, columnspan=2)
+
+
+converted_result = tk.Text(root, height=1, width=30)
+
 # Start the tkinter main loop
 root.mainloop()
